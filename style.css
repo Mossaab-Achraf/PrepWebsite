@@ -1,0 +1,235 @@
+*, *::before, *::after{
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+     /* outline: 1px solid red; */
+}
+
+:root{
+     --nav-color    : hsl(300, 80%, 30%);
+     --nav-font     : #fff;
+     --main-color   : hsl(180, 8%, 92%);
+     --btn-color    : hsl(34, 99%, 70%);
+     --data-color   : hsl(180, 43%, 91%);
+     --footer-color : hsl(211, 16%, 37%);
+     --footer-font  : #fff;
+     --shadow-color : rgba(0, 0, 0, 0.2);
+}
+
+html{
+     font-size: 16px;
+     font-family: -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     font-weight: 700;
+     line-height: 10px;
+}
+
+/* navar css sheet */
+
+.navbarr{
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+     height: 50px;
+     color: var(--nav-font) !important;
+     padding: 0.5rem 2rem;
+     background-color: var(--nav-color);
+     box-shadow: 0px 40px 70px rgb(0 0 0 / 7%);
+}
+
+a{
+     text-decoration: none !important;
+     font-size: 15px;
+     cursor: pointer;
+     color: var(--nav-font) !important;
+}
+
+button{
+     cursor: pointer;
+     width: 70px;
+     height: 30px;
+     border: none;
+     border-radius: 3px;
+     font-weight: 700;
+     background-color: var(--btn-color);
+}
+
+.logo{
+     margin-right: 10rem;
+}
+.logo img{
+     padding-bottom: 7px;
+     height: 35px;
+     width : 35px;
+}
+
+.items ul{
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     padding-top: 0.5rem;
+     width: 300px;
+     list-style: none;
+}
+.items img{
+     width : 25px;
+     height: 25px;
+}
+
+.info{
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     margin-left: auto;
+     margin-right: 2rem;
+     width: 90px;
+}
+.info img{
+     width : 25px;
+     height: 25px;
+}
+
+/* carousel css sheet */
+
+.container{
+     width: 100%;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+     width: 100%;
+     height: 50vh;
+}
+
+/* data css sheet */
+
+.data{
+     display: flex;
+     justify-content: space-around;
+     font-size: 55px;
+     font-weight: 900;
+     color: var(--nav-color);
+     padding: 3rem;
+     margin: 5rem auto;
+     width: 90%;
+     box-shadow: 2px 0px 50px 5px rgba(0, 0, 0, 0.2);
+     background-color: var(--main-color);
+}
+
+.data-x{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 0.5rem;
+} 
+.data-x img{
+     padding-left: .7rem;
+     width: 50px;
+     height: 50px;
+}   
+
+/* fixed css sheet */
+
+.fixed {
+     background-image: url("img/fixed.jpg");
+     width: 100%;
+     height: 200px;
+     background-attachment: fixed;
+}
+
+/* content info css sheet */
+
+.content-info{
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     padding: 2rem;
+     margin: 5rem auto;
+}
+
+.top-youtube table tr td,
+.top-youtube table tr th{
+     border: 1px dotted #888;
+     padding: 1rem 5rem;
+     margin: 1rem;
+}
+
+.categorie table tr td,
+.categorie table tr th{
+     border: 1px dotted #888;
+     padding: 3rem 15rem;
+     margin: 1rem;
+}
+
+/* footer css sheet */
+
+.footer{
+     display: grid;
+     grid-template-columns: repeat(3,1fr);
+     justify-content: space-between;
+     align-content: center;
+     color: var(--footer-font);
+     background-color: var(--footer-color);
+     padding: 2rem 5rem;
+}
+
+.about{
+     padding: 1rem;
+     margin: 1rem;
+}
+.about h1{
+     padding: 0.7rem 0.5rem;
+}
+.about p{
+     padding: 0 0.5rem;
+     font-size: 17px;
+     font-weight: 400;
+}
+
+.social{
+     padding: 1rem;
+     margin: 1rem;
+}
+.social h1{
+     padding: 0.7rem 0.5rem;
+}
+.social-link{
+     padding: 2rem 0.5rem;
+     cursor: pointer;
+}
+.social-link img{
+     width: 33px;
+     height: 33px;
+     margin: 0 1rem;
+}
+
+.contact{
+     padding: 1rem;
+     margin: 1rem;
+}
+.contact h1{
+     padding: 0.7rem 0.5rem;
+}
+.contact-form{
+     display: flex;
+     flex-direction: column;
+     padding: 0.5rem 0.5rem;
+}
+.contact-form > *{
+     outline: none;
+     padding: 0.3rem 0.1rem;
+     font-size: 16px;
+}
+.contact-form input, .contact-form textarea{
+     color: #000;
+}
+
+.btns-contact{
+     display: flex;
+     justify-content: space-around;
+     margin: 1rem;
+}
+.btns-contact button{
+     width: 100px;
+     height: 25px;
+     font-weight: 700;
+}

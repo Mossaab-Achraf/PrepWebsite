@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Prep Website</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+     <!-- navbar section -->
+
+     <div class="navbarr">
+          <div class="logo">
+               <a href="#"><img src="./img/logo.png" alt="logo">Solo Learn</a>
+          </div>
+          <div class="items">
+               <ul>
+                    <li> <a href="#"> <img src="./img/js.png"> javascript</a> </li>
+                    <li> <a href="#"> <img src="./img/html.png"> html</a> </li>
+                    <li> <a href="#"> <img src="./img/css.png"> css</a> </li>
+               </ul>
+          </div>
+          <div class="info">
+               <div class="notification"> <a href="#"> <img src="./img/notification.png" alt=""> </a> </div>
+               <div class="contact"><a href="#"> <img src="./img/message.png" alt=""> </a> </div>
+               <div class="guest"> <a href="#"> <img src="./img/user.png" alt=""> </a> </div>
+          </div>
+     </div>
+
+     <!-- carrousel section -->
+
+     <div class="slide" data-ride="carousel" data-interval="3000" data-wrap="true">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+               <div class="item active">
+                    <img src="./img/javascript.jpg">
+               </div>
+     
+               <div class="item">
+                    <img src="./img/html.jpg">
+               </div>
+     
+               <div class="item">
+                    <img src="./img/css.jpg">
+               </div>
+          </div>
+     </div>
+
+     <!-- content info section -->
+     
+     <div class="content-info">
+          <div class="top-youtube">
+               <table>
+                    <tr>
+                         <th>top channel youtube</th>
+                    </tr>
+                    <tr>
+                         <td>1st channel</td>
+                    </tr>
+                    <tr>
+                         <td>2nd channel</td>
+                    </tr>
+                    <tr>
+                         <td>3rd channel</td>
+                    </tr>
+                    <tr>
+                         <td>4nd channel</td>
+                    </tr>
+                    <tr>
+                         <td>5rd channel</td>
+                    </tr>
+               </table>
+          </div>
+          <div class="categorie">
+               <table>
+                    <tr>
+                         <td> <img src="./img/js.png"> javascript </td>
+                    </tr>
+                    <tr>
+                         <td> <img src="./img/html.png"> html </td>
+                    </tr>
+                    <tr>
+                         <td> <img src="./img/css.png"> css </td>
+                    </tr>
+               </table>
+          </div>
+     </div>
+
+     <!-- fixed div section -->
+
+     <div class="fixed"></div>
+
+     <!-- data section -->
+     
+     <div class="data">
+          <div class="students data-x">
+               5 <img src="./img/student.png" alt="">
+          </div>
+          <div class="exercices data-x">
+               15 <img src="./img/exercices.png" alt="">
+          </div>
+          <div class="quiz data-x">
+               3 <img src="./img/quiz.png" alt="">
+          </div>
+          <div class="categories data-x">
+               3 <img src="./img/categories.png" alt="">
+          </div>
+     </div>
+
+     <!-- footer section -->
+     
+     <div class="footer">
+          <div class="about">
+               <h1>About</h1>
+               <p>Mobile web involves accessing websites via smartphones and tablets.
+                    It is an entirely distinct media. A smartphone is a mobile phone 
+                    that includes numerous functions such as accessing Internet, downloading
+                    and using apps, checking email, and incorporates elements such as GPS and camera, etc.
+               </p>
+          </div>
+          <div class="social">
+               <h1>social</h1>
+               <div class="social-link"> <img src="./img/facebook.png" alt=""> facebook</div>
+               <div class="social-link"> <img src="./img/youtube.png" alt=""> youtube</div>
+               <div class="social-link"> <img src="./img/instagram.png" alt=""> instagram</div>
+          </div>
+          <div class="contact" id="contact">
+               <h1>contact</h1>
+               <div class="contact-form">
+                    <label for="">name</label><input class="input" type="text">
+                    <label for="">email</label><input class="input" type="text">
+                    <label for="">your message</label>
+                    <textarea class="input" cols="10" rows="10"> </textarea>
+                    <div class="btns-contact">
+                         <button onclick="send()">send</button>
+                         <button onclick="$('.input').val('')">reset</button>
+                         <span style="color: green;" id="result"></span>
+                    </div>
+     
+               </div>
+          </div>
+     </div>
+
+     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+          integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+     <script src="data.js"></script>
+     <script src="main.js"></script>
+</body>
+</html>
