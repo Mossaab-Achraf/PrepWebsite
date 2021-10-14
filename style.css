@@ -50,7 +50,8 @@ button{
      border: none;
      border-radius: 3px;
      font-weight: 700;
-     background-color: var(--btn-color);
+     color: #fff;
+     background-color: var(--nav-color);
 }
 
 .logo{
@@ -111,7 +112,7 @@ button{
      padding: 3rem;
      margin: 5rem auto;
      width: 90%;
-     box-shadow: 2px 0px 50px 5px rgba(0, 0, 0, 0.2);
+     box-shadow: 2px 0px 10px 5px rgba(0, 0, 0, 0.1);
      background-color: var(--main-color);
 }
 
@@ -142,22 +143,27 @@ button{
      display: flex;
      justify-content: space-around;
      align-items: center;
-     padding: 2rem;
-     margin: 5rem auto;
+     margin: 5rem 5rem;
 }
 
 .top-youtube table tr td,
 .top-youtube table tr th{
      border: 1px dotted #888;
-     padding: 1rem 5rem;
-     margin: 1rem;
+     padding: 2rem;
+}
+
+.categorie table{
+     margin: 2rem;
+     width: 70%;
+     float: right;
+     box-shadow: 2px 0 100px 15px rgba(0, 0, 0, 0.1);
+
 }
 
 .categorie table tr td,
 .categorie table tr th{
-     border: 1px dotted #888;
-     padding: 3rem 15rem;
-     margin: 1rem;
+     border: 1px solid #888;
+     padding: 2rem;
 }
 
 /* footer css sheet */
@@ -169,7 +175,7 @@ button{
      align-content: center;
      color: var(--footer-font);
      background-color: var(--footer-color);
-     padding: 2rem 5rem;
+     padding: 1rem 5rem;
 }
 
 .about{
@@ -193,7 +199,7 @@ button{
      padding: 0.7rem 0.5rem;
 }
 .social-link{
-     padding: 2rem 0.5rem;
+     padding: 1rem 0.5rem;
      cursor: pointer;
 }
 .social-link img{
@@ -217,7 +223,8 @@ button{
 .contact-form > *{
      outline: none;
      padding: 0.3rem 0.1rem;
-     font-size: 16px;
+     font-size: 14px;
+     font-weight: 500;
 }
 .contact-form input, .contact-form textarea{
      color: #000;
@@ -233,3 +240,101 @@ button{
      height: 25px;
      font-weight: 700;
 }
+
+.content{
+     margin: 2rem 0;
+}
+
+.exercice{
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     font-weight: 700;
+     max-width: 80%;
+
+     margin: 1rem auto;
+}
+.exercice p{
+     margin: 1rem;
+}
+
+.exercice .title{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border: 1px dotted #888;
+     padding: 0 .5rem;
+}
+
+.quiz{
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     font-weight: 500;
+     max-width: 50%;
+     padding: 1rem 0;
+     margin: 1rem auto;
+}
+
+.quiz .title{
+     padding: 1rem;
+}
+
+.choice span{
+     font-size: 15px;
+     padding: 0 1rem;
+}
+
+.btns-quiz{
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     width: 50%;
+     margin: 0 auto;
+}
+
+/* notification css sheet */
+
+.notif-content{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin: 2rem;
+     width: 90%;
+}
+
+.notif-item{
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     width: 80%;
+}
+.notif-item table td{
+     padding: 0.2rem 1rem;
+     border: 1px solid #000;
+}
+
+.green{
+     background-color: hsl(120, 75%, 70%);
+}
+
+.red{
+     background-color: hsl(10, 100%, 65%);
+}
+
+#myBtn {
+     display: none;
+     position: fixed;
+     bottom: 20px;
+     right: 30px;
+     z-index: 99;
+     color: #fff;
+     font-size: 18px;
+     border: none;
+     outline: none;
+     padding: 5px;
+     border-radius: 4px;
+     height: 40px;
+     background-color: var(--nav-color);
+}
+
