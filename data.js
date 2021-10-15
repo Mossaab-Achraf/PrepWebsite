@@ -339,6 +339,26 @@ function get_Quiz(course_name, quiz_number) {
     );
 }
 
+function get_Course(course_name) {
+    var array_Courses = this; // meaningful name, instead of "that"
+    return reduce(
+        array_Courses,
+        function (accumulator, element) {
+            // if the name of the element (course) is correspending to "course_name"
+            if (element.name === course_name) {
+                // then, the new value of the accumulator, will be our specific element
+                return element.quizzes[quiz_number - 1];
+            } else {
+                // if the element is not yet found, it will be "null" value
+                // or, it already found ... it will continue returning the previous & same value of the accumulator
+                return accumulator;
+            }
+            // if(accumulator.name === course_name)
+        },
+        null // started will have a null value, & the accumulator will have the null, or the result
+    );
+}
+
 // --------------- JavaScript code content of Exercice 1 to 5 --------------
 js_code_1 = `function hello(name) {
     // Write your code here
@@ -569,9 +589,11 @@ var data = [
 
 array_Courses = Array_Courses();
 array_Courses.init(data);
-console.log(array_Courses.get_Exercices("JavaScript"));
-console.log(array_Courses.get_Exercice("JavaScript", i));
+console.log();
+console.log(array_Courses.get_Exercice("JavaScript", 1).render_Exercice());
 console.log(array_Courses.get_Exercices("CSS"));
 console.log(array_Courses.get_Exercice("HTML", 5));
 console.log(array_Courses.get_Quizzes("HTML"));
 console.log(array_Courses.get_Quiz("HTML", 5));
+
+array_Courses.get_Exercices("JavaScript");
