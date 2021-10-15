@@ -1,14 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/style.css">
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Prep Website</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <script src="./scripts/achraf.js"></script>
+
+     <!-- navbar section -->
+
+     <div class="navbarr">
+          <div class="logo" id="logo">
+               <a href="#"><img src="./img/logo.png" alt="logo">Coding Learn</a>
+          </div>
+          <div class="items">
+               <ul>
+                    <li id="javascript"> <a href="#"> <img src="./img/js-icon.png"> javascript</a> </li>
+                    <li id="html"> <a href="#"> <img src="./img/html-icon.png"> html</a> </li>
+                    <li id="css"> <a href="#"> <img src="./img/css-icon.png"> css</a> </li>
+               </ul>
+          </div>
+          <div class="info">
+               <div class="notification" id="notification"> <a href="#"> <img src="./img/notification.png" alt=""> </a> </div>
+               <div class="contact" id="message"><a href="#contact"> <img src="./img/message.png" alt=""> </a> </div>
+               <div class="guest" id="guest"> <a href="#"> <img src="./img/user.png" alt=""> </a> </div>
+          </div>
+     </div>
+
+     <!-- main section  -->
+
+     <div class="main">
+
+          <!-- carrousel section -->
+
+          <div class="slide" data-ride="carousel" data-interval="3000" data-wrap="true">
+               <!-- Wrapper for slides -->
+               <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                         <img src="./img/javascript.jpg">
+                    </div>
+          
+                    <div class="item">
+                         <img src="./img/html.jpg">
+                    </div>
+          
+                    <div class="item">
+                         <img src="./img/css.jpg">
+                    </div>
+               </div>
+          </div>
+
+          <!-- content info section -->
+          
+          <div class="content-info">
+               <div class="top-youtube">
+                    <table>
+                         <tr>
+                              <th>top channel youtube</th>
+                         </tr>
+                         <tr>
+                              <td>1st channel</td>
+                         </tr>
+                         <tr>
+                              <td>2nd channel</td>
+                         </tr>
+                         <tr>
+                              <td>3rd channel</td>
+                         </tr>
+                    </table>
+               </div>
+               <div class="categorie">
+                    <table>
+                         <tr>
+                              <td> <img style="border-radius: 50%; width: 50px;  margin: .5rem;" src="./img/js-icon.png">
+                                   JavaScript is the world's most popular programming language.
+                                   JavaScript is the programming language of the Web.
+                                   JavaScript is easy to learn. 
+                              </td>
+                         </tr>
+                         <tr>
+                              <td> <img style="border-radius: 50%; width: 50px;  margin: .5rem;" src="./img/html-icon.png">
+                                   HTML (HyperText Markup Language) is the most basic building block of the Web.
+                                   It defines the meaning and structure of web content.
+                              </td>
+                         </tr>
+                         <tr>
+                              <td> <img style="border-radius: 50%; width: 50px; margin: .5rem;" src="./img/css-icon.png"> 
+                                   CSS is the language we use to style an HTML document.
+                                   CSS describes how HTML elements should be displayed.
+                              </td>
+                         </tr>
+                    </table>
+               </div>
+          </div>
+
+          <!-- fixed div section -->
+
+          <div class="fixed"></div>
+
+          <!-- data section -->
+          
+          <div class="data">
+               <div class="data-x">
+                    5 <img src="./img/student.png" alt="">
+               </div>
+               <div class="data-x">
+                    15 <img src="./img/exercices.png" alt="">
+               </div>
+               <div class="data-x">
+                    3 <img src="./img/quiz.png" alt="">
+               </div>
+               <div class="data-x">
+                    3 <img src="./img/categories.png" alt="">
+               </div>
+          </div>
+     </div>     
+
+     <!-- content section -->
+     
+     <div class="content" id="content"> </div>
+
+     <!-- notification section -->
+     
+     <div class="notif-content" id="notif-content"> </div>
+
+     <!-- footer section -->
+     
+     <div class="footer">
+          <div class="about">
+               <h1>About</h1>
+               <p>Our mission: to help people learn to code for free. 
+                    We accomplish this by creating thousands of videos, articles, and
+               interactive coding lessons - all freely available to the public.
+               </p>
+          </div>
+          <div class="social">
+               <h1>social</h1>
+               <div class="social-link"> <img src="./img/facebook.png" alt=""> facebook</div>
+               <div class="social-link"> <img src="./img/youtube.png" alt=""> youtube</div>
+               <div class="social-link"> <img src="./img/instagram.png" alt=""> instagram</div>
+          </div>
+          <div class="contact" id="contact">
+               <h1>contact</h1>
+               <div class="contact-form">
+                    <input class="input" type="text" placeholder="name">
+                    <br>
+                    <input class="input" type="text" placeholder="email">
+                    <label for="">your message</label>
+                    <textarea class="input" cols="10" rows="5"></textarea>
+                    <div class="btns-contact">
+                         <button onclick="send()">send</button>
+                         <button onclick="$('.input').val('')">reset</button>
+                         <span style="color: green;" id="result"></span>
+                    </div>
+               </div>
+          </div>
+     </div>
+     
+     <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+          integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+     <script src="data.js"></script>
+     <script src="main.js"></script>
 </body>
 </html>
+
+
+
+

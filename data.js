@@ -87,6 +87,7 @@ function Array_Exercices() {
     var array_Exercices = [];
 
     array_Exercices.add_Exercice = add_Exercice;
+    array_Exercices.render_Exercices = render_Exercices;
 
     return array_Exercices;
 }
@@ -94,6 +95,14 @@ function Array_Exercices() {
 function add_Exercice(exercice) {
     exercice.number = this.length + 1;
     this.push(exercice);
+}
+
+function render_Exercices() {
+    thml_content = "";
+    for (var i = 0; i < this.length; i++) {
+        thml_content += this[i].render_Exercice();
+    }
+    return thml_content;
 }
 
 // ----------------------------- Class of Quiz -----------------------------
@@ -116,7 +125,8 @@ function check(answer) {
     return this.choices[0] === answer;
 }
 
-function render_Quiz(quiz) {
+function render_Quiz() {
+    console.log();
     var answer = [];
     var i = 0;
     while (i < 3) {
@@ -128,24 +138,24 @@ function render_Quiz(quiz) {
     }
     return `<div class ="quiz">
     <div class="title">
-        <p>${quiz.number} ${quiz.statment}:</p>
+        <p>${this.number} - ${this.statment}:</p>
     </div>
 
-    <div class="choice" id="quiz-${quiz.number}">
+    <div class="choice" id="quiz-${this.number}">
         <pre>
             <span>
                 <input type="radio" name="choice" id="choice-1">${
-                    quiz.choices[answer[0]]
+                    this.choices[answer[0]]
                 }
             </span>
             <span>
                 <input type="radio" name="choice" id="choice-2">${
-                    quiz.choices[answer[1]]
+                    this.choices[answer[1]]
                 }
             </span>
             <span>
                 <input type="radio" name="choice" id="choice-3">${
-                    quiz.choices[answer[2]]
+                    this.choices[answer[2]]
                 }
             </span>
         </pre>
@@ -197,6 +207,7 @@ function Array_Courses() {
     array_Courses.get_Exercices = get_Exercices;
     array_Courses.get_Quiz = get_Quiz;
     array_Courses.get_Quizzes = get_Quizzes;
+    array_Courses.get_Course = get_Course;
 
     return array_Courses;
 }
@@ -347,7 +358,7 @@ function get_Course(course_name) {
             // if the name of the element (course) is correspending to "course_name"
             if (element.name === course_name) {
                 // then, the new value of the accumulator, will be our specific element
-                return element.quizzes[quiz_number - 1];
+                return element;
             } else {
                 // if the element is not yet found, it will be "null" value
                 // or, it already found ... it will continue returning the previous & same value of the accumulator
@@ -587,13 +598,17 @@ var data = [
 
 // -------------------------- Initializing System --------------------------
 
-array_Courses = Array_Courses();
+window.array_Courses = Array_Courses();
 array_Courses.init(data);
-console.log();
+
 console.log(array_Courses.get_Exercice("JavaScript", 1).render_Exercice());
-console.log(array_Courses.get_Exercices("CSS"));
+console.log(array_Courses.get_Exercices("JavaScript").render_Exercices());
 console.log(array_Courses.get_Exercice("HTML", 5));
 console.log(array_Courses.get_Quizzes("HTML"));
-console.log(array_Courses.get_Quiz("HTML", 5));
 
-array_Courses.get_Exercices("JavaScript");
+for (var i = 1; i <= 5; i++) {
+    console.log(
+        "New Iteration :",
+        array_Courses.get_Quiz("HTML", i).render_Quiz()
+    );
+}
