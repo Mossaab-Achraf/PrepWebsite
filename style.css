@@ -131,7 +131,7 @@ button{
 /* fixed css sheet */
 
 .fixed {
-     background-image: url("img/fixed.jpg");
+     background-image: url("./img/fixed.jpg");
      width: 100%;
      height: 200px;
      background-attachment: fixed;
