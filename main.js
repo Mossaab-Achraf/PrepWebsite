@@ -1,20 +1,26 @@
+var guest = {};
+guest.javascript = { ex: [], q: 2};
+guest.html = { ex: [3, 4, 5], q: 3 };
+guest.css  = { ex: [1, 2, 3], q: 5 };
+
 $(document).ready(()=>{
      $("#logo").on('click',()=>{
           $(".main").show();
           $("#content").hide();
           $("#notif-content").hide();
      });
-     $("#javascript").on('click',()=>renderContents());
-     $("#html").on('click', ()=>renderContents());
-     $("#css").on('click', ()=>renderContents());
-     $("#notification").on('click',()=>renderNotification());
+     $("#javascript").on('click',()=>renderContents(javascript));
+     $("#html").on('click', ()=>renderContents(html));
+     $("#css").on('click', ()=>renderContents(css));
+     $("#notification").on('click',()=>renderNotification(guest));
      $("#guest").on('click', () => renderGuest());
 });
 
-function renderExercice(i){
+function renderExercice(obj,i){
+     // var finish = (n) => { guest.javascript.ex.push(n) };
      var $div = `
      <div class="exercice">
-          <div class="title"><h3>Exercice `+i+`</h3> <span style="cursor:pointer;" onclick="$('#ex`+i+`').toggle()"> <img src='./img/hide.png'> </span></div>
+          <div class="title"><h3>Exercice `+ i + `</h3> <span id="finish` + i + `" class="finish" onclick="guest.javascript.ex.push(`+i+`);"> finish </span> <span style="cursor:pointer;" onclick="$('#ex`+i+`').toggle()"> <img src='./img/hide.png'> </span></div>
           <div id="ex`+i+`">
           <p>We have two ways of writing a function. The function declaration is what we've used so far, and the function
           expression is new to us. Rewrite the following function declarations using a function expression:</p>
@@ -70,30 +76,43 @@ function renderQuiz(i){
      return $quiz;
 }
 
-function renderContents(){
+function renderContents(obj){
      $(".main").hide();
      $("#notif-content").hide();
      var content = $("#content").first();
      content.show();
      content.html("");
      for(var i = 1; i <= 5; i++){
-          content.append(renderExercice(i));
+          content.append(renderExercice(obj,i));
      }
      content.append(renderQuiz(1));
 }
 
-function renderNotification(){
+function renderNotification(guest){
      var notification = $("#notif-content").first();
+     var addClass = (obj, i) =>{
+          if(i === 'Q'){
+               if(obj.q > 2){
+                    return "green"
+               }else if(obj.q < 3){
+                    return "red"
+               }
+          }else if(obj.ex.indexOf(i) != -1){
+               return "green"
+          } 
+               
+     }
+     var quiz = (obj) => "Q: " + obj.q + "/5";
      var $div = `
-          <div class="js-notification notif-item"  > Javascript &nbsp;
+          <div class="js-notification notif-item"> Javascript &nbsp;
                <table>
                <tr>
-                    <td class="green">1</td>
-                    <td class="green">2</td>
-                    <td class="">3</td>
-                    <td class="">4</td>
-                    <td class="">5</td>
-                    <td class="red">Q: 2/5</td>
+                    <td class=` + addClass(guest.javascript,1) + `>1</td>
+                    <td class=` + addClass(guest.javascript,2) + `>2</td>
+                    <td class=` + addClass(guest.javascript,3) + `>3</td>
+                    <td class=` + addClass(guest.javascript,4) + `>4</td>
+                    <td class=` + addClass(guest.javascript,5) + `>5</td>
+                    <td class=` + addClass(guest.javascript,'Q') + `>`+quiz(guest.javascript)+`</td>
                </tr>
                </table>
           </div>
@@ -101,12 +120,12 @@ function renderNotification(){
           <div class="html-notification notif-item"> HTML &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                <table>
                <tr>
-                    <td class="green">1</td>
-                    <td class="green">2</td>
-                    <td class="green">3</td>
-                    <td class="green">4</td>
-                    <td class="green">5</td>
-                    <td class="green">Q: 3/5</td>
+                    <td class=` + addClass(guest.html, 1) + `>1</td>
+                    <td class=` + addClass(guest.html, 2) + `>2</td>
+                    <td class=` + addClass(guest.html, 3) + `>3</td>
+                    <td class=` + addClass(guest.html, 4) + `>4</td>
+                    <td class=` + addClass(guest.html, 5) + `>5</td>
+                    <td class=` + addClass(guest.html, 'Q') + `>` + quiz(guest.html) +`</td>
                </tr>
                </table>
           </div>
@@ -114,12 +133,12 @@ function renderNotification(){
           <div class="css-notification notif-item" > Css &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                <table>
                <tr>
-                    <td class="">1</td>
-                    <td class="">2</td>
-                    <td class="">3</td>
-                    <td class="green">4</td>
-                    <td class="green">5</td>
-                    <td class="red">Q: 0/5</td>
+                    <td class=` + addClass(guest.css, 1) + `>1</td>
+                    <td class=` + addClass(guest.css, 2) + `>2</td>
+                    <td class=` + addClass(guest.css, 3) + `>3</td>
+                    <td class=` + addClass(guest.css, 4) + `>4</td>
+                    <td class=` + addClass(guest.css, 5) + `>5</td>
+                    <td class=` + addClass(guest.css, 'Q') + `>` + quiz(guest.css) +`</td>
                </tr>
                </table>
           </div>
