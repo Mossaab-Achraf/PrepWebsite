@@ -56,6 +56,7 @@ function Exercice(statment, code) {
     var exercice = {};
 
     exercice.number = null;
+    exercice.course_name = null;
     exercice.statment = statment;
     exercice.code = code;
 
@@ -69,6 +70,7 @@ function render_Exercice() {
 <div class="exercice">
     <div class="title">
         <h3>Exercice ${this.number}</h3>
+        <span id="finish${this.number}" class="finish" onclick='guest["${this.course_name}"].ex.push(${this.number});'>finish</span>
         <span style="cursor:pointer;" onclick="$('#ex-${this.number}').toggle()">
             <img src='./img/hide.png'>
         </span>
@@ -76,7 +78,9 @@ function render_Exercice() {
 
     <div id="ex-${this.number}">
         <p>${this.statment}</p>
-        <pre><code>${this.code}</code></pre>
+        <pre><code>
+${this.code}
+    </code></pre>
     </div>
 <div>`;
 }
@@ -98,11 +102,11 @@ function add_Exercice(exercice) {
 }
 
 function render_Exercices() {
-    thml_content = "";
+    html_content = "";
     for (var i = 0; i < this.length; i++) {
-        thml_content += this[i].render_Exercice();
+        html_content += this[i].render_Exercice();
     }
-    return thml_content;
+    return html_content;
 }
 
 // ----------------------------- Class of Quiz -----------------------------
@@ -111,6 +115,7 @@ function Quiz(statment, choices) {
     var quiz = {};
 
     quiz.number = null;
+    quiz.course_name = null;
     quiz.statment = statment;
     quiz.choices = choices; // array of choices
 
@@ -126,7 +131,7 @@ function check(answer) {
 }
 
 function render_Quiz() {
-    console.log();
+    var quiz_id = this.course_name + "-" + this.number;
     var answer = [];
     var i = 0;
     while (i < 3) {
@@ -136,7 +141,7 @@ function render_Quiz() {
             i++;
         }
     }
-    return `<div class ="quiz">
+    return `<div class ="quiz" id="quiz-${quiz_id}">
     <div class="title">
         <p>${this.number} - ${this.statment}:</p>
     </div>
@@ -144,26 +149,49 @@ function render_Quiz() {
     <div class="choice" id="quiz-${this.number}">
         <pre>
             <span>
-                <input type="radio" name="choice" id="choice-1">${
-                    this.choices[answer[0]]
-                }
+                <input type="radio" name="choice-${quiz_id}" id="choice-${quiz_id}-1"> <label for="choice-${quiz_id}-1" class="label-answer">${
+        this.choices[answer[0]]
+    }</label>
             </span>
             <span>
-                <input type="radio" name="choice" id="choice-2">${
-                    this.choices[answer[1]]
-                }
+                <input type="radio" name="choice-${quiz_id}" id="choice-${quiz_id}-2"> <label for="choice-${quiz_id}-2" class="label-answer">${
+        this.choices[answer[1]]
+    }</label>
             </span>
             <span>
-                <input type="radio" name="choice" id="choice-3">${
-                    this.choices[answer[2]]
-                }
+                <input type="radio" name="choice-${quiz_id}" id="choice-${quiz_id}-3"> <label for="choice-${quiz_id}-3" class="label-answer">${
+        this.choices[answer[2]]
+    }</label>
             </span>
         </pre>
     </div>
 
     <div class="btns-quiz">
-        <button id="next">next</button>
-        <button id="reset">skip</button>
+    ${
+        this.number > 1
+            ? `<button id="prev-btn-${this.course_name}-${
+                  this.number
+              }" onclick="$('#quiz-${this.course_name}-${
+                  this.number
+              }').hide();$('#quiz-${this.course_name}-${
+                  this.number - 1
+              }').show();">Previous</button>`
+            : ``
+    }
+    ${
+        this.number < 5
+            ? `<button id="next-btn-${this.course_name}-${
+                  this.number
+              }" onclick="$('#quiz-${this.course_name}-${
+                  this.number
+              }').hide();$('#quiz-${this.course_name}-${
+                  this.number + 1
+              }').show();">Next</button>`
+            : ``
+    }
+        <button id="finish-btn-${this.course_name}-${
+        this.number
+    }" onclick="validate-quiz()">Submit</button>
     </div>
 </div>`;
 }
@@ -231,7 +259,7 @@ function init(data) {
         // i = 1 (JavaScript)
         // i = 2 (HTML)
         // i = 3 (CSS)
-        console.log("Content_of_Course[i] :", data[i].content); // => {array_Exercices, array_Quizzes}
+        // console.log("Content_of_Course[i] :", data[i].content); // => {array_Exercices, array_Quizzes}
         for (var key in data[i].content) {
             // console.log(key) // => "exercices" then "quizzes"
             // console.log(data[i].content[key]) // => array_Exercices & array_Quizzes
@@ -246,6 +274,7 @@ function init(data) {
 
                     // Create a new Exercice an initialize the statment & the code content
                     exercice = Exercice(statment, code);
+                    exercice.course_name = data[i].course.toLowerCase();
                     // Add a number to the current exercice, then add it to the array_Exercices
                     array_Exercices.add_Exercice(exercice);
                 }
@@ -259,6 +288,7 @@ function init(data) {
                     statment = data[i].content[key][j].statment;
                     choices = data[i].content[key][j].choices;
                     quiz = Quiz(statment, choices);
+                    quiz.course_name = data[i].course.toLowerCase();
                     array_Quizzes.add_Quiz(quiz);
                 }
             }
@@ -387,43 +417,176 @@ js_code_4 = `function show(anything){
     // Write your code here
 }`;
 
-js_code_5 = `function nothing (){
-    return;
-}`;
+js_code_5 = `let length = 16;          //
+
+let lastName = "Johnson"; //
+
+const x = {
+    firstName: "John",
+    lastName: "Doe"
+};                        //`;
 
 // ------------------ HTML code content of Exercice 1 to 5 -----------------
-html_code_1 = `
-So many codes
-`;
-html_code_2 = `
-another codes
-`;
-html_code_3 = `
-simple code
-`;
-html_code_4 = `
-beautiful code
-`;
-html_code_5 = `
-code yourself
-`;
+html_code_1 = `&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a href=&quot;html_images.asp&quot; style=&quot;write your code here&quot;&gt;HTML Images&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+html_code_2 = `&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a href=&quot;html_images.asp&quot; target=&quot;write your code here&quot;&gt;HTML Images&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+html_code_3 = `&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;table&gt;
+
+        &lt;tr&gt;
+            &lt;th&gt;First Name&lt;/th&gt;
+            &lt;th&gt;Last Name&lt;/th&gt;
+            &lt;th&gt;Points&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Jill&lt;/td&gt;
+            &lt;td&gt;Smith&lt;/td&gt;
+            &lt;td&gt;50&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+html_code_4 = `&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;li&gt;Coffee&lt;/li&gt;
+    &lt;li&gt;Tea&lt;/li&gt;
+    &lt;li&gt;Milk&lt;/li&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;`;
+html_code_5 = `&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;ul style=&quot;Write your code here;&quot;&gt;
+        &lt;li&gt;Coffee&lt;/li&gt;
+        &lt;li&gt;Tea&lt;/li&gt;
+        &lt;li&gt;Milk&lt;/li&gt;
+    &lt;/ul&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;`;
 
 // ------------------ CSS code content of Exercice 1 to 5 ------------------
-css_code_1 = `
-So many codes
+css_code_1 = `&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;This is a Heading&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;p&gt;This is another paragraph.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;`;
+css_code_2 = `&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;This is a Heading&lt;/h1&gt;
+&lt;p id=&quot;para1&quot;&gt;This is a paragraph.&lt;/p&gt;
+&lt;p&gt;This is another paragraph.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;`;
+css_code_3 = `&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;This is a Heading&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;p class=&quot;colortext&quot;&gt;This is another paragraph.&lt;/p&gt;
+&lt;p class=&quot;colortext&quot;&gt;This is also a paragraph.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;`;
+css_code_4 = `&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;This is a heading&lt;/h1&gt;
+&lt;h2&gt;This is a smaller heading&lt;/h2&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;p&gt;This is another paragraph.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
 `;
-css_code_2 = `
-So many codes
-`;
-css_code_3 = `
-simple code
-`;
-css_code_4 = `
-beautiful code
-`;
-css_code_5 = `
-code yourself
-`;
+css_code_5 = `&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;This is a Heading&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;p&gt;This is another paragraph.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;`;
 
 // ------------------------- Initialization of Data ------------------------
 
@@ -445,7 +608,7 @@ var javascript_Exercices = [
         code: js_code_4,
     },
     {
-        statment: `Test this function and understand what really happens`,
+        statment: `Use comments to describe the correct data type of the following variables:`,
         code: js_code_5,
     },
 ];
@@ -485,11 +648,23 @@ var javascript_Quizzes = [
 ];
 
 var html_Exercices = [
-    { statment: `Statement`, code: html_code_1 },
-    { statment: `Another statments`, code: html_code_2 },
-    { statment: `Not the same statment`, code: html_code_3 },
-    { statment: `very usefull & informative statment`, code: html_code_4 },
-    { statment: `finaly the last statment to understand`, code: html_code_5 },
+    {
+        statment: `Use CSS to remove the underline from the link.`,
+        code: html_code_1,
+    },
+    {
+        statment: `Use the correct HTML attribute to make the link open in a new window.`,
+        code: html_code_2,
+    },
+    { statment: `Add a table caption that says "Names".`, code: html_code_3 },
+    {
+        statment: `Finish the HTML code to make an ordered list.`,
+        code: html_code_4,
+    },
+    {
+        statment: `Use CSS to display squares instead of bullets.`,
+        code: html_code_5,
+    },
 ];
 var html_Quizzes = [
     {
@@ -516,18 +691,22 @@ var html_Quizzes = [
             `The <head> section`,
         ],
     },
+    // {
+    //     statment: `What is the correct syntax for referring to an external script called "main.js"?`,
+    //     choices: [
+    //         `<script src="main.js">`,
+    //         `<script href="main.js">`,
+    //         `<script name="xxx.js">`,
+    //     ],
+    // },
     {
-        statment: `What is the correct syntax for referring to an external script called "main.js"?`,
-        choices: [
-            `<script src="main.js">`,
-            `<script href="main.js">`,
-            `<script name="xxx.js">`,
-        ],
+        statment: `Where is the meta tag only found?`,
+        choices: [`The home page`, `The second page`, `The last page`],
     },
     {
         statment: `What is a comment on HTML ?`,
         choices: [
-            `<!-- This is a comment -->`,
+            `/// This is a comment ///`,
             `// This is a comment`,
             `/* This is a comment */`,
         ],
@@ -535,11 +714,26 @@ var html_Quizzes = [
 ];
 
 var css_Exercices = [
-    { statment: `Statement`, code: css_code_1 },
-    { statment: `Another statments`, code: css_code_2 },
-    { statment: `Not the same statment`, code: css_code_3 },
-    { statment: `very usefull & informative statment`, code: css_code_4 },
-    { statment: `finaly the last statment to understand`, code: css_code_5 },
+    {
+        statment: `Change the color of all &lt;p&gt; elements to "red".`,
+        code: css_code_1,
+    },
+    {
+        statment: `Change the color of the element with id="para1", to "red".`,
+        code: css_code_2,
+    },
+    {
+        statment: `Change the color of all elements with the class "colortext", to "red".`,
+        code: css_code_3,
+    },
+    {
+        statment: `Change the color of all &lt;p&gt; and &lt;h1&gt; elements, to &quot;red&quot;. Group the selectors to minimize code.`,
+        code: css_code_4,
+    },
+    {
+        statment: `Add an external style sheet with the URL: "mystyle.css".`,
+        code: css_code_5,
+    },
 ];
 var css_Quizzes = [
     {
@@ -551,15 +745,19 @@ var css_Quizzes = [
         ],
     },
     {
-        statment: `Which HTML tag is used to define an internal style sheet?`,
-        choices: [`<style>`, `<script>`, `<css>`],
+        statment: `What is a selector?`,
+        choices: [
+            `An attribute that allows you to select an HTML element for styling within CSS`,
+            `Elements that connect HTML and CSS`,
+            `A class or ID`,
+        ],
     },
     {
         statment: `How do you insert a comment in a CSS file?`,
         choices: [
             ` /* this is a comment */`,
             `// this is a comment`,
-            `<!-- This is a comment -->`,
+            `/// This is a comment ///`,
         ],
     },
     {
@@ -598,17 +796,17 @@ var data = [
 
 // -------------------------- Initializing System --------------------------
 
-window.array_Courses = Array_Courses();
+array_Courses = Array_Courses();
 array_Courses.init(data);
-
-console.log(array_Courses.get_Exercice("JavaScript", 1).render_Exercice());
-console.log(array_Courses.get_Exercices("JavaScript").render_Exercices());
-console.log(array_Courses.get_Exercice("HTML", 5));
-console.log(array_Courses.get_Quizzes("HTML"));
+// console.log(array_Courses.get_Exercice("JavaScript", 1).render_Exercice());
+// console.log(array_Courses.get_Exercices("JavaScript").render_Exercices());
+// console.log(array_Courses.get_Exercice("HTML", 5));
+// console.log(array_Courses.get_Quizzes("HTML"));
 
 for (var i = 1; i <= 5; i++) {
-    console.log(
-        "New Iteration :",
-        array_Courses.get_Quiz("HTML", i).render_Quiz()
-    );
+    array_Courses.get_Quiz("HTML", i).render_Quiz();
 }
+
+array_Courses.get_Quiz("JavaScript", 1).render_Quiz();
+
+array_Courses.get_Course("JavaScript");
